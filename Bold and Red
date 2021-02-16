@@ -1,1 +1,39 @@
+Option Explicit
 
+Sub CountLarge()
+    Dim MyValue As Integer
+    Dim Counter As Long
+    Dim Cell As Range
+    Dim StartTime As Double
+    Dim SecondsElapsed As Double
+    
+    MyValue = -1
+    
+    While MyValue < 0 Or MyValue > 240
+        MyValue = InputBox("Enter value between 0 and 240")
+    Wend
+    
+    Counter = 0
+    Dim Rng As Range: Set Rng = Application.Range("Data!A1:BI1001")
+    
+    StartTime = Timer
+    Application.ScreenUpdating = False
+    
+    For Each Cell In Rng
+        If Cell.Value > MyValue Then
+            Counter = Counter + 1
+            Cell.Font.Color = vbRed
+            Cell.Font.Bold = True
+        End If
+    Next Cell
+    
+    Application.ScreenUpdating = True
+    
+    SecondsElapsed = Round(Timer - StartTime, 2)
+    
+    MsgBox "Counter: " & Counter
+    
+    Range("Start!A3").Value = "The search for large values took " & SecondsElapsed & " second."
+    
+    
+End Sub
