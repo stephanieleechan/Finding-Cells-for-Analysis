@@ -1,0 +1,28 @@
+Option Explicit
+
+Sub readwrite()
+
+    Dim r As Integer
+    Dim c As Integer
+    
+    Dim months(1 To 12) As String
+    Dim daysInMonth(1 To 12) As Integer
+    
+    For r = 1 To 12
+        months(r) = Sheet1.Range("A" & r).Value
+        daysInMonth(r) = Sheet1.Range("B" & r).Value
+        Debug.Print months(r), daysInMonth(r)
+    Next r
+    
+    For c = 1 To 12
+        Sheet2.Range(Chr(64 + c) & 1) = months(c)
+        Sheet2.Range(Chr(64 + c) & 2) = daysInMonth(c)
+    Next c
+    
+End Sub
+
+Sub clearsheet2()
+
+    Sheet2.Cells.clear
+
+End Sub
