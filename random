@@ -1,0 +1,27 @@
+Option Explicit
+Sub example()
+
+    Dim r As Integer
+    Dim c As Integer
+    Dim num(1 To 10, 1 To 5) As Integer
+    
+    Randomize
+    
+    Sheet1.Cells.clear
+
+    For r = 1 To 10
+        For c = 1 To 5
+            Sheet1.Range(Chr(64 + c) & r).Value = Int(100 * Rnd + 100)
+        Next c
+        'Application.Wait (Now + TimeValue("0:00:02"))
+    Next r
+    
+    For r = 1 To 10
+        For c = 1 To 5
+            num(r, c) = Sheet1.Range(Chr(64 + c) & r).Value
+        Next c
+    Next r
+    Debug.Print num(10, 5)
+    
+
+End Sub
